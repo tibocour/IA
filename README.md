@@ -30,8 +30,8 @@ notebook mis au point sur [`Google/Colab`](https://colab.research.google.com/).
 Voir [ici](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb#scrollTo=Rmai0dD30XzL)
 pour les détails d'intégration.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/thibocour/IA/blob/master/notebooks/detectron2.ipynb)
-[Demonstrateur - apprentissage par detectron2 pour la détection de mégots](https://github.com/thibocour/IA/blob/master/notebooks/detectron2.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/detectron2.ipynb)
+[Demonstrateur - apprentissage par detectron2 pour la détection de mégots](https://github.com/tibocour/IA/blob/master/notebooks/detectron2.ipynb)
 ## Entrainement Coral TPU
 
 Coming soon !! 
@@ -53,6 +53,6 @@ Coming soon !!
 
 email : [birdsforchange](mailto:contact@birdsforchange.com)
 
-auteurs : [@thibocour](https://github.com/tibocour), [@sdesrozis](https://github.com/sdesrozis)
+auteurs : [@tibocour](https://github.com/tibocour), [@sdesrozis](https://github.com/sdesrozis)
 
 
