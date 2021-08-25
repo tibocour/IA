@@ -32,7 +32,29 @@ pour les détails d'intégration.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/detectron2.ipynb)
 [Demonstrateur - apprentissage par detectron2 pour la détection de mégots](https://github.com/tibocour/IA/blob/master/notebooks/detectron2.ipynb)
-## Entrainement Coral TPU
+
+## Entrainement
+
+![Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
+
+Un entrainement utilisant [`tflite-model-maker`](https://www.tensorflow.org/lite/tutorials/model_maker_object_detection) construit sur 
+[`Tensorflow`](https://www.tensorflow.org) est disponible dans un
+notebook mis au point sur [`Google/Colab`](https://colab.research.google.com/). 
+Voir [ici](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb#scrollTo=Rmai0dD30XzL)
+pour les détails d'intégration.
+
+> La version de `tensorflow` utilisée est [`tensorflow-lite`](https://www.tensorflow.org/lite) qui est une version
+> lègère spécifiquement mis au point pour les machines mobiles, et IoT. Ceci limite 
+> en particulier le choix des architectures neuronales.
+
+On se base ici sur l'architecture de detection proposée par `Google` : [EfficientDet](https://arxiv.org/pdf/1911.09070.pdf). 
+Voir également [ici](https://ai.googleblog.com/2020/04/efficientdet-towards-scalable-and.html) pour les détails.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/tflite_model_maker.ipynb)
+[Apprentissage par tensorflow-lite pour la détection de mégots](https://github.com/tibocour/IA/blob/master/notebooks/tflite_model_maker.ipynb)
+
+## Inférence Coral TPU
 
 Coming soon !! 
 
@@ -48,6 +70,11 @@ Coming soon !!
 * https://github.com/facebookresearch/detectron2
 * https://ai.facebook.com/blog/-detectron2-a-pytorch-based-modular-object-detection-library-/
 * https://detectron2.readthedocs.io/en/latest/index.html
+* https://www.tensorflow.org/lite/tutorials/model_maker_object_detection
+* https://www.tensorflow.org/lite/api_docs/python/tflite_model_maker/object_detector
+* https://coral.ai/docs/edgetpu/retrain-detection/
+* https://github.com/google-coral/tflite/tree/master/python/examples/detection
+* https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/raspberry_pi
 
 ## Contacts
 
