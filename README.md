@@ -35,6 +35,8 @@ pour les détails d'intégration.
 
 ## Entrainement
 
+### Demonstrateur
+
 ![Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
 
@@ -53,6 +55,39 @@ Voir également [ici](https://ai.googleblog.com/2020/04/efficientdet-towards-sca
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/tflite_model_maker.ipynb)
 [Apprentissage par tensorflow-lite pour la détection de mégots](https://github.com/tibocour/IA/blob/master/notebooks/tflite_model_maker.ipynb)
+
+## Etape 0 - Augmentation des données
+
+Si la librairie `detectron2` intègre automatiquement l'augmentation de données, ce n'est pas (encore) le cas de 
+`tensorflow-lite`. Pour etre exact, cette fonctionnalité est disponible pour la classification mais pas encore pour
+la détection. 
+
+D'autre part, le format `Label Studio` est incompatible pour une utilisation directe dans `tflite-model-maker` à cause :
+* utilisation du format d'encoding `xml` incompatible avec la librairie de parsing `lxml`
+* les fichiers n'ont pas l'extension `.jpg`
+
+Le script `python/label_studio_voc_converter.py` permet de corriger cela et d'augmenter les données en une passe. Les 
+augmentations sont typiquement des flips, crops et autres modifications affines. De plus, le script permet de séparer 
+les données pour l'entrainement est la validation suivant un ratio.
+
+Usage :
+
+    python python/label_studio_voc_converter.py --zip <label-studio-zip-file>
+                                                --train_split <ratio>
+                                                --size <nb-of-augmentation>
+
+Défauts :
+* `--train_split 0.8` : 80% des données sont pour l'apprentissage.
+* `--size 10` : 10 images augmentées sont générées en plus de l'originale.
+
+> Les augmentations ne sont pas opérées sur les données de validation.
+
+Exemple :
+
+    python python/label_studio_voc_converter.py --zip data/megots150images.zip
+    
+Les fichiers `train_megots150images.zip` et `valid_megots150images.zip` sont alors générés.
+Chacun est un dataset au format `Pascal VOC XML`.
 
 ## Inférence Coral TPU
 
