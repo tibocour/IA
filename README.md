@@ -19,7 +19,9 @@ Ensemble de jeux de données annotées par `BFC` disponibles :
 Les jeux de données sont au format [Pascal VOC XML](http://host.robots.ox.ac.uk/pascal/VOC/). 
 Ce format peut typiquement etre généré par l'outil [Label Studio](https://labelstud.io/)
 
-## Demonstrateur 
+## Demonstrateurs
+
+## `detectron2`
 
 ![Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252)
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=PyTorch&logoColor=white)
@@ -33,9 +35,7 @@ pour les détails d'intégration.
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/detectron2.ipynb)
 [Demonstrateur - apprentissage par detectron2 pour la détection de mégots](https://github.com/tibocour/IA/blob/master/notebooks/detectron2.ipynb)
 
-## Entrainement
-
-### Demonstrateur
+## `tflite-model-maker`
 
 ![Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
@@ -55,6 +55,14 @@ Voir également [ici](https://ai.googleblog.com/2020/04/efficientdet-towards-sca
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/tflite_model_maker.ipynb)
 [Apprentissage par tensorflow-lite pour la détection de mégots](https://github.com/tibocour/IA/blob/master/notebooks/tflite_model_maker.ipynb)
+
+## Entrainement
+
+## Installation
+
+Les modules nécessaires s'installent via `pip`
+
+    pip install -r requirements.txt
 
 ## Etape 0 - Augmentation des données
 
@@ -88,6 +96,21 @@ Exemple :
     
 Les fichiers `train_megots150images.zip` et `valid_megots150images.zip` sont alors générés.
 Chacun est un dataset au format `Pascal VOC XML`.
+
+## Etape 1 - Entraintement par Transfert Learning
+
+Le script `python/train.py` permet d'effectuer un entrainement d'un réseau de neurones pour la détection. Le 
+réseau utilisé est `efficientdet`, préconisé par Google pour la détection sur Coral. Pour plus de détails,
+voir la [publication](https://arxiv.org/pdf/1911.09070.pdf) et 
+[ici](https://ai.googleblog.com/2020/04/efficientdet-towards-scalable-and.html).
+
+Usage:
+
+    python python/label_studio_voc_converter.py --train_zip data/train_megots150images.zip
+                                                --valid_zip data/train_megots150images.zip                                        
+
+Le script permet de générer un fichier du modèle `efficientdet-lite-bfc.tflite` et un fichier `bfc-labels.txt` 
+contenant les labels. En particulier, c'est le fichier `tflite` qui doit etre utilisé en inférence.
 
 ## Inférence Coral TPU
 

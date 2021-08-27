@@ -1,2 +1,5 @@
 imgaug
 pascal-voc-writer
+tflite-model-maker-nightly # nightly is used due to issue [1]
+
+# [1] https://discuss.tensorflow.org/t/invalidargumenterror-required-broadcastable-shapes-op-mul/3824/4
