@@ -106,8 +106,21 @@ voir la [publication](https://arxiv.org/pdf/1911.09070.pdf) et
 
 Usage:
 
-    python python/label_studio_voc_converter.py --train_zip data/train_megots150images.zip
-                                                --valid_zip data/train_megots150images.zip                                        
+    python python/label_studio_voc_converter.py --train_zip <train-zip-path>
+                                                --valid_zip <valid-zip-path> 
+                                                --epochs <nb-of-epochs>
+                                                --batch_size <batch-size>
+                                                --with_tflite_eval <0-or-1>
+
+Défauts :
+* `--epochs 50` : apprentissage sur 50 epochs
+* `--batch_size 10` : Batch de 10 images
+* `--with_tflite_eval 0` : pas d'évaluation du modèle `tflite` par défaut (couteux). 
+
+Exemple :
+    
+    python IA/python/train.py --train_zip IA/data/train_megots150images.zip 
+                              --valid_zip IA/data/valid_megots150images.zip
 
 Le script permet de générer un fichier du modèle `efficientdet-lite-bfc.tflite` et un fichier `bfc-labels.txt` 
 contenant les labels. En particulier, c'est le fichier `tflite` qui doit etre utilisé en inférence.
