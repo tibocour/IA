@@ -30,7 +30,6 @@ def autodetect_labels(annotation_dir):
 
 
 def extract_dataset(zipname, dirname):
-
     print(f"extract zip file {zipname} in {dirname}")
     shutil.unpack_archive(filename=zipname, extract_dir=dirname, format="zip")
 
@@ -52,9 +51,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser("Litter Trainer for BirdsForChange")
     parser.add_argument("--train_zip", type=str, required=True)
     parser.add_argument("--valid_zip", type=str, required=True)
+    parser.add_argument("--epochs", type=int, default=50)
+    parser.add_argument("--batch_size", type=int, default=10)
+    parser.add_argument("--with_tflite_eval", type=int, default=0)
     args = parser.parse_args()
 
     print(f"Tensorflow version : {tf.__version__}")
+    print(f"args : {args}")
 
     with tempfile.TemporaryDirectory() as zip_tmpdirname:
 
@@ -81,13 +84,16 @@ if __name__ == '__main__':
         model = object_detector.create(train_data=train_data,
                                        model_spec=spec,
                                        validation_data=valid_data,
-                                       epochs=50,
-                                       batch_size=10,
+                                       epochs=args.epochs,
+                                       batch_size=args.batch_size,
                                        train_whole_model=True)
 
         # evaluate
-        model.evaluate(train_data)
-        model.evaluate(valid_data)
+        print("evaluate on train_data")
+        print(model.evaluate(train_data))
+
+        print("evaluate on valid_data")
+        print(model.evaluate(valid_data))
 
         # export the model
         model.export(export_dir='.',
@@ -95,9 +101,10 @@ if __name__ == '__main__':
                      label_filename='bfc-labels.txt',
                      export_format=[ExportFormat.TFLITE, ExportFormat.LABEL])
 
-        # evaluate model using tflite
-        model.evaluate_tflite('efficientdet-lite-bfc.tflite', train_data)
-        model.evaluate_tflite('efficientdet-lite-bfc.tflite', valid_data)
+        if args.with_tflite_eval:
+            # evaluate model using tflite
+            print("evaluate tflite on train_data")
+            print(model.evaluate_tflite('efficientdet-lite-bfc.tflite', train_data))
 
-
-
+            print("evaluate tflite on valid_data")
+            print(model.evaluate_tflite('efficientdet-lite-bfc.tflite', valid_data))
