@@ -138,7 +138,6 @@ if __name__ == '__main__':
             threshold=args.threshold
         )
 
-        im.save(args.output)
+        im_infer = Image.fromarray(detection_result_image)
 
-        # Show the detection result
-        # Image.fromarray(detection_result_image)
+        im_infer.save(args.output)
