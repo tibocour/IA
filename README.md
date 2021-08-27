@@ -104,7 +104,7 @@ réseau utilisé est `efficientdet`, préconisé par Google pour la détection s
 voir la [publication](https://arxiv.org/pdf/1911.09070.pdf) et 
 [ici](https://ai.googleblog.com/2020/04/efficientdet-towards-scalable-and.html).
 
-Usage:
+Usage :
 
     python python/label_studio_voc_converter.py --train_zip <train-zip-path>
                                                 --valid_zip <valid-zip-path> 
@@ -124,6 +124,28 @@ Exemple :
 
 Le script permet de générer un fichier du modèle `efficientdet-lite-bfc.tflite` et un fichier `bfc-labels.txt` 
 contenant les labels. En particulier, c'est le fichier `tflite` qui doit etre utilisé en inférence.
+
+## Etape 2 - Inférence x86 (et Colab)
+
+Le script `python/inference_x86.py` permet de lancer une inférence.
+
+Usage :
+
+    python python/inference_x86.py --image <image-path>
+                                   --tflite_model <tflite-model-path>
+                                   --labels <labels-path>
+                                   --output <output-path>
+                                   --threshold <detection-threshold>
+
+Défauts :
+* `--threshold 0.5` : le seuil de détection par défaut est `0.5`.
+
+Exemple :
+
+    python python/inference_x86.py --image data/images/test_image.jpg
+                                   --tflite_model ./efficientdet-lite-bfc.tflite
+                                   --labels ./bfc-labels.txt
+                                   --output ./inference_test_image.jpg
 
 ## Inférence Coral TPU
 
