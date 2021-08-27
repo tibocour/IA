@@ -3,17 +3,10 @@ import argparse
 import tempfile
 import numpy as np
 import cv2
-import matplotlib.pyplot as plt
 
 import tensorflow as tf
 
 from PIL import Image
-
-# Load the labels into a list
-classes = ["megot"]
-
-# Define a list of colors for visualization
-COLORS = np.random.randint(0, 255, size=(len(classes), 3), dtype=np.uint8)
 
 
 def preprocess_image(image_path, input_size):
@@ -65,7 +58,7 @@ def detect_objects(interpreter, image, threshold):
     return results
 
 
-def run_odt_and_draw_results(image_path, interpreter, threshold=0.5):
+def run_odt_and_draw_results(image_path, interpreter, classes, threshold=0.5):
     """Run object detection on the input image and draw the detection results"""
     # Load the input shape required by the model
     _, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']
@@ -78,6 +71,9 @@ def run_odt_and_draw_results(image_path, interpreter, threshold=0.5):
 
     # Run object detection on the input image
     results = detect_objects(interpreter, preprocessed_image, threshold=threshold)
+
+    # Define a list of colors for visualization
+    COLORS = np.random.randint(0, 255, size=(len(classes), 3), dtype=np.uint8)
 
     print(f"detection results : {results}")
 
@@ -117,6 +113,12 @@ if __name__ == '__main__':
     parser.add_argument("--threshold", type=float, default=0.5)
     args = parser.parse_args()
 
+    with open(args.labels, "r") as reader:
+        labels = [line.strip() for line in reader.readlines()]
+    labels = labels[:-1]
+
+    print(f"labels : {labels}")
+
     with tempfile.TemporaryDirectory() as tmpdirname:
         print(f"created zip temporary directory: {tmpdirname}")
 
@@ -135,7 +137,8 @@ if __name__ == '__main__':
         detection_result_image = run_odt_and_draw_results(
             os.path.join(tmpdirname, "image.png"),
             interpreter,
-            threshold=args.threshold
+            threshold=args.threshold,
+            classes=labels
         )
 
         im_infer = Image.fromarray(detection_result_image)
