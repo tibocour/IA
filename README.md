@@ -125,37 +125,47 @@ Exemple :
 Le script permet de générer un fichier du modèle `efficientdet-lite-bfc.tflite` et un fichier `bfc-labels.txt` 
 contenant les labels. En particulier, c'est le fichier `tflite` qui doit etre utilisé en inférence.
 
-## Etape 2 - Inférence x86 (testé sur Google/Colab)
+## Etape 2 - Inférence (testé sur Google/Colab)
 
-Le script `python/inference_x86.py` permet de lancer une inférence.
+Le script `python/google-coral-inference/detect_image.py` permet de lancer une inférence. Ce script est un fork de la 
+version officielle proposée par `google-coral`. Toutefois, une adaptation permet de lancer des inférences hors `Coral
+TPU`.
 
 Usage :
 
-    python python/inference_x86.py --image <image-path>
-                                   --tflite_model <tflite-model-path>
-                                   --labels <labels-path>
-                                   --output <output-path>
-                                   --threshold <detection-threshold>
+    cd IA/python/google-coral-inference/
 
-Défauts :
-* `--threshold 0.5` : le seuil de détection par défaut est `0.5`.
+    python detect_image.py --image <image-path>
+                           --output <output-path>
+                           --model <tflite-model-path>
+                           --labels <labels-path>
+                                   
+> A noter qu'il faut lancer l'inférence à partir du dossier du script
 
 Exemple :
 
-    python python/inference_x86.py --image data/images/test_image.jpg
-                                   --tflite_model ./efficientdet-lite-bfc.tflite
-                                   --labels ./bfc-labels.txt
-                                   --output ./inference_test_image.jpg
+    cd IA/python/google-coral-inference/
+
+    python detect_image.py --image ../../data/images/test_image.jpg
+                           --model ../../data/efficientdet-lite-bfc.tflite
+                           --labels ../../data/bfc-labels.txt
+                           --output ./inference_test_image.jpg
 
 Un notebook de synthèse a été mis au point pour tester les différents scripts.
 
 [Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
 [Apprentissage et inférence par scripts](https://github.com/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
 
-
 ## Inférence Coral TPU
 
-Coming soon !! 
+Pour utiliser l'inférence sur `Coral TPU`, il faut au préalable installer les différents modules nécessaires en suivant
+les [consignes suivantes](https://github.com/google-coral/tflite/tree/master/python/examples/detection#set-up-your-device).
+
+En particulier, voir 
+* https://coral.ai/docs/accelerator/get-started/
+* https://www.tensorflow.org/lite/guide/python
+
+L'inférence présentée dans la section précédente doit ainsi fonctionner en tirant partie du `Coral TPU`.
 
 ## Ressources en vrac
 
@@ -180,6 +190,11 @@ Lien à noter pour l'apprentissage à partir de `tensorflow` (conversion vers `t
 * https://github.com/tensorflow/models/tree/master/research/object_detection/colab_tutorials
 
 > Tutoriel `eager_few_shot_od_training_tflite.ipynb` à voir si besoin
+
+Consigne d'installation pour `Coral TPU`
+* https://coral.ai/docs/accelerator/get-started/
+* https://www.tensorflow.org/lite/guide/python
+* https://github.com/google-coral/tflite/tree/master/python/examples/detection
 
 ## Contacts
 
