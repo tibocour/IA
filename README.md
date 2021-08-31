@@ -125,7 +125,7 @@ Exemple :
 Le script permet de générer un fichier du modèle `efficientdet-lite-bfc.tflite` et un fichier `bfc-labels.txt` 
 contenant les labels. En particulier, c'est le fichier `tflite` qui doit etre utilisé en inférence.
 
-## Etape 2 - Inférence x86 (et Colab)
+## Etape 2 - Inférence x86 (testé sur Google/Colab)
 
 Le script `python/inference_x86.py` permet de lancer une inférence.
 
@@ -146,6 +146,12 @@ Exemple :
                                    --tflite_model ./efficientdet-lite-bfc.tflite
                                    --labels ./bfc-labels.txt
                                    --output ./inference_test_image.jpg
+
+Un notebook de synthèse a été mis au point pour tester les différents scripts.
+
+[Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
+[Apprentissage et inférence par scripts](https://github.com/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
+
 
 ## Inférence Coral TPU
 
