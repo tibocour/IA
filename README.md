@@ -175,6 +175,12 @@ Coming soon !!
 * https://github.com/google-coral/tflite/tree/master/python/examples/detection
 * https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/raspberry_pi
 
+Lien à noter pour l'apprentissage à partir de `tensorflow` (conversion vers `tflite` ensuite)
+* https://github.com/tensorflow/models/tree/master/research/object_detection/models
+* https://github.com/tensorflow/models/tree/master/research/object_detection/colab_tutorials
+
+> Tutoriel `eager_few_shot_od_training_tflite.ipynb` à voir si besoin
+
 ## Contacts
 
 email : [birdsforchange](mailto:contact@birdsforchange.com)
