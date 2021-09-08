@@ -119,23 +119,23 @@ Défauts :
 
 Exemple :
     
-    python IA/python/train.py --train_zip IA/data/train_megots150images.zip 
-                              --valid_zip IA/data/valid_megots150images.zip
+    python python/train.py --train_zip data/train_megots150images.zip
+                           --valid_zip data/valid_megots150images.zip
 
 Le script permet de générer un fichier du modèle `efficientdet-lite-bfc.tflite` et un fichier `bfc-labels.txt` 
 contenant les labels. En particulier, c'est le fichier `tflite` qui doit etre utilisé en inférence.
 
-## Etape 2 - Inférence (testé sur Google/Colab)
+## Etape 2 - Inférence d'une image
 
-Le script `python/google-coral-inference/detect_image.py` permet de lancer une inférence. Ce script est un fork de la 
-version officielle proposée par `google-coral`. Toutefois, une adaptation permet de lancer des inférences hors `Coral
-TPU`.
+Le script `python/google-coral-inference/detect_image.py` permet de lancer une inférence d'une image. Ce script est un 
+fork de la version officielle proposée par `google-coral`. Toutefois, une adaptation permet de lancer des inférences 
+hors `Coral TPU`. 
 
 Usage :
 
     cd IA/python/google-coral-inference/
 
-    python detect_image.py --image <image-path>
+    python detect_image.py --input <image-path>
                            --output <output-path>
                            --model <tflite-model-path>
                            --labels <labels-path>
@@ -146,15 +146,44 @@ Exemple :
 
     cd IA/python/google-coral-inference/
 
-    python detect_image.py --image ../../data/images/test_image.jpg
+    python detect_image.py --input ../../data/images/test_image.jpg
                            --model ../../data/efficientdet-lite-bfc.tflite
                            --labels ../../data/bfc-labels.txt
                            --output ./inference_test_image.jpg
+
+> Testé sur x86 et Google Colab.
 
 Un notebook de synthèse a été mis au point pour tester les différents scripts.
 
 [Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
 [Apprentissage et inférence par scripts](https://github.com/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
+
+## Etape 2 - Inférence d'une vidéo
+
+Le script `python/google-coral-inference/detect_video.py` permet de lancer une inférence d'une vidéo. Ce script est une
+modification de la version officielle proposée par `google-coral`. 
+
+Usage :
+
+    cd IA/python/google-coral-inference/
+
+    python detect_image.py --input <image-path>
+                           --output <output-path>
+                           --model <tflite-model-path>
+                           --labels <labels-path>
+                                   
+> A noter qu'il faut lancer l'inférence à partir du dossier du script
+
+Exemple :
+
+    cd IA/python/google-coral-inference/
+
+    python detect_image.py --input ../../data/images/test_image.jpg
+                           --model ../../data/efficientdet-lite-bfc.tflite
+                           --labels ../../data/bfc-labels.txt
+                           --output ./inference_test_image.jpg
+
+> Testé sur x86 et Google Colab.
 
 ## Inférence Coral TPU
 
