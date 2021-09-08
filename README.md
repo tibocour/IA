@@ -125,7 +125,7 @@ Exemple :
 Le script permet de générer un fichier du modèle `efficientdet-lite-bfc.tflite` et un fichier `bfc-labels.txt` 
 contenant les labels. En particulier, c'est le fichier `tflite` qui doit etre utilisé en inférence.
 
-## Etape 2 - Inférence d'une image
+## Etape 2a - Inférence d'une image
 
 Le script `python/google-coral-inference/detect_image.py` permet de lancer une inférence d'une image. Ce script est un 
 fork de la version officielle proposée par `google-coral`. Toutefois, une adaptation permet de lancer des inférences 
@@ -153,12 +153,7 @@ Exemple :
 
 > Testé sur x86 et Google Colab.
 
-Un notebook de synthèse a été mis au point pour tester les différents scripts.
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
-[Apprentissage et inférence par scripts](https://github.com/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
-
-## Etape 2 - Inférence d'une vidéo
+## Etape 2b - Inférence d'une vidéo
 
 Le script `python/google-coral-inference/detect_video.py` permet de lancer une inférence d'une vidéo. Ce script est une
 modification de la version officielle proposée par `google-coral`. 
@@ -184,6 +179,20 @@ Exemple :
                            --output ./inference_test_image.jpg
 
 > Testé sur x86 et Google Colab.
+
+## Notebooks des scripts
+
+Un notebook de synthèse a été mis au point pour tester les scripts d'entrainement (Etape 1) et d'inférence d'une 
+image (Etape 2a).
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
+[Apprentissage et inférence d'une image par scripts](https://github.com/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
+
+Un notebook de synthèse a été mis au point pour tester les scripts d'inférence d'une image (Etape 2a) et vidéo
+(Etape 2b).
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/infer_tflite_model_video.ipynb)
+[inférence d'une image et une vidéo par scripts](https://github.com/tibocour/IA/blob/master/notebooks/infer_tflite_model_video.ipynb)
 
 ## Inférence Coral TPU
 
