@@ -106,11 +106,11 @@ voir la [publication](https://arxiv.org/pdf/1911.09070.pdf) et
 
 Usage :
 
-    python python/label_studio_voc_converter.py --train_zip <train-zip-path>
-                                                --valid_zip <valid-zip-path> 
-                                                --epochs <nb-of-epochs>
-                                                --batch_size <batch-size>
-                                                --with_tflite_eval <0-or-1>
+    python python/train.py --train_zip <train-zip-path>
+                           --valid_zip <valid-zip-path> 
+                           --epochs <nb-of-epochs>
+                           --batch_size <batch-size>
+                           --with_tflite_eval <0-or-1>
 
 Défauts :
 * `--epochs 50` : apprentissage sur 50 epochs
@@ -155,7 +155,7 @@ Exemple :
 
 Un notebook de synthèse a été mis au point pour tester les différents scripts.
 
-[Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
 [Apprentissage et inférence par scripts](https://github.com/tibocour/IA/blob/master/notebooks/train_tflite_model.ipynb)
 
 ## Etape 2 - Inférence d'une vidéo
