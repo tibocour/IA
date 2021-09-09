@@ -203,7 +203,18 @@ En particulier, voir
 * https://coral.ai/docs/accelerator/get-started/
 * https://www.tensorflow.org/lite/guide/python
 
-L'inférence présentée dans la section précédente doit ainsi fonctionner en tirant partie du `Coral TPU`.
+L'inférence présentée dans la section précédente fonctionne en tirant partie du `Coral TPU`.
+
+### Compilation du modèle
+
+Les modèles appris dans les sections précédentes doivent maintenant être compilés spécifiquement pour tirer parti du
+`Coral TPU`. On peut installer le compilateur `Edge TPU` en suivant les [consignes suivantes](ttps://coral.ai/docs/edgetpu/compiler/#system-requirements).
+
+> Attention, le compilateur n'est disponible que sur les systèmes basés sur Linux/Debian. Une alternative consiste à 
+> passer par Google Colab pour effectuer la compilation. Pour cela, ouvrir et exécuter le notebook 
+> [ici](https://colab.research.google.com/github/google-coral/tutorials/blob/master/compile_for_edgetpu.ipynb). 
+
+Typiquement, les modèles compilés sont suffixés par `_edgetpu.tflite`.
 
 ## Ressources en vrac
 
