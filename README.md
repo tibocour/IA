@@ -125,6 +125,9 @@ Exemple :
 Le script permet de générer un fichier du modèle `efficientdet-lite-bfc.tflite` et un fichier `bfc-labels.txt` 
 contenant les labels. En particulier, c'est le fichier `tflite` qui doit etre utilisé en inférence.
 
+> Pour execution sur `Coral TPU`, le modèle compilé doit maintenant être compilé. 
+> Voir la section [Compilation du modèle](#compilation-du-modèle)
+
 ## Etape 2a - Inférence d'une image
 
 Le script `python/google-coral-inference/detect_image.py` permet de lancer une inférence d'une image. Ce script est un 
@@ -153,6 +156,8 @@ Exemple :
 
 > Testé sur x86 et Google Colab.
 
+> Pour execution sur `Coral TPU`, utiliser le modèle compilé `efficientdet-lite-bfc_edgetpu.tflite`.
+
 ## Etape 2b - Inférence d'une vidéo
 
 Le script `python/google-coral-inference/detect_video.py` permet de lancer une inférence d'une vidéo. Ce script est une
@@ -179,6 +184,8 @@ Exemple :
                            --output ./inference_test_image.jpg
 
 > Testé sur x86 et Google Colab.
+
+> Pour execution sur `Coral TPU`, utiliser le modèle compilé `efficientdet-lite-bfc_edgetpu.tflite`.
 
 ## Notebooks des scripts
 
