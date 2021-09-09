@@ -167,7 +167,7 @@ Usage :
 
     cd IA/python/google-coral-inference/
 
-    python detect_image.py --input <image-path>
+    python detect_video.py --input <image-path> | --camera <camera-id>
                            --output <output-path>
                            --model <tflite-model-path>
                            --labels <labels-path>
@@ -178,14 +178,23 @@ Exemple :
 
     cd IA/python/google-coral-inference/
 
-    python detect_image.py --input ../../data/images/test_image.jpg
+    python detect_video.py --input ../../data/1megot.mp4
                            --model ../../data/efficientdet-lite-bfc.tflite
                            --labels ../../data/bfc-labels.txt
-                           --output ./inference_test_image.jpg
+                           --output ./inference_1megot.mp4
 
 > Testé sur x86 et Google Colab.
 
 > Pour execution sur `Coral TPU`, utiliser le modèle compilé `efficientdet-lite-bfc_edgetpu.tflite`.
+
+Pour tester à partir d'une caméra donnée :
+
+    cd IA/python/google-coral-inference/
+
+    python detect_video.py --camera 0
+                           --model ../../data/efficientdet-lite-bfc.tflite
+                           --labels ../../data/bfc-labels.txt
+                           --output ./inference_camera.mp4
 
 ## Notebooks des scripts
 
@@ -251,6 +260,10 @@ Consigne d'installation pour `Coral TPU`
 * https://coral.ai/docs/accelerator/get-started/
 * https://www.tensorflow.org/lite/guide/python
 * https://github.com/google-coral/tflite/tree/master/python/examples/detection
+
+Exemples d'application `Coral TPU`
+* https://github.com/google-coral/pycoral
+* https://github.com/google-coral/examples-camera
 
 ## Contacts
 
