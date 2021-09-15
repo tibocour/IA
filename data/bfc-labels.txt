@@ -1,2 +1,5 @@
 megot
-???
+feuille
+croquette
+ticket de caisse
+capsule
