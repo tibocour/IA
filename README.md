@@ -97,6 +97,11 @@ Exemple :
 Les fichiers `train_megots150images.zip` et `valid_megots150images.zip` sont alors générés.
 Chacun est un dataset au format `Pascal VOC XML`.
 
+Un notebook a été mis au point pour tester le script d'augmentation.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/data_augmentation.ipynb)
+[Augmentationn de données](https://github.com/tibocour/IA/blob/master/notebooks/data_augmentation.ipynb)
+
 ## Etape 1 - Entraintement par Transfert Learning
 
 Le script `python/train.py` permet d'effectuer un entrainement d'un réseau de neurones pour la détection. Le 
