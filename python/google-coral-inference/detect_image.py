@@ -102,6 +102,8 @@ def main():
                         help='Number of times to run inference')
     args = parser.parse_args()
 
+    print('With Edge TPU ?', with_edgetpu)
+
     labels = load_labels(args.labels) if args.labels else {}
     interpreter = make_interpreter(args.model)
     interpreter.allocate_tensors()

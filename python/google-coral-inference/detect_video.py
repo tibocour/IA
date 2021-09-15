@@ -94,7 +94,9 @@ def main():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-m', '--model', required=True,
                         help='File path of .tflite file.')
-    parser.add_argument('-i', '--input', required=True,
+    parser.add_argument('-i', '--input', type=str,
+                        help='File path of video to process.')
+    parser.add_argument('-c', '--camera', type=int,
                         help='File path of video to process.')
     parser.add_argument('-l', '--labels',
                         help='File path of labels file.')
@@ -104,11 +106,18 @@ def main():
                         help='File path for the result video with annotations')
     args = parser.parse_args()
 
+    print('With Edge TPU ?', with_edgetpu)
+
     labels = load_labels(args.labels) if args.labels else {}
     interpreter = make_interpreter(args.model)
     interpreter.allocate_tensors()
 
-    cap = cv2.VideoCapture(args.input)
+    if args.input is not None:
+        cap = cv2.VideoCapture(args.input)
+    elif args.camera is not None:
+        cap = cv2.VideoCapture(args.camera)
+    else:
+        raise ValueError("input or camera argument is required")
 
     fps = cap.get(cv2.CAP_PROP_FPS)
     w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -121,6 +130,9 @@ def main():
     frame_id = 0
 
     while True:
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
         is_ok, img0 = cap.read()
 
