@@ -15,9 +15,33 @@ de déchets dans des images typiquement issues d'automates mis en place par
 
 Ensemble de jeux de données annotées par `BFC` disponibles :
 * [`megots150images.zip`](data/megots150images.zip) : archive de 147 images de mégots de cigarette
+* [`train_megots150images.zip`](data/train_megots150images.zip) : archive de plus de mille images de mégots de cigarette générée à partir de `megots150images.zip` pour l'entrainement
+* [`valid_megots150images.zip`](data/valid_megots150images.zip) : archive de 17 images de mégots de cigarette générée à partir de `megots150images.zip` pour la validation
 
 Les jeux de données sont au format [Pascal VOC XML](http://host.robots.ox.ac.uk/pascal/VOC/). 
 Ce format peut typiquement etre généré par l'outil [Label Studio](https://labelstud.io/)
+
+Pour être valide, une archive `zip` doit contenir 2 répertoires `images` et `Annotations`.
+
+```commandline
+> unzip megots150images.zip
+
+Archive:  megots150images.zip
+   creating: Annotations/
+   creating: images/
+  inflating: images/1608647944.jpg   
+  ...
+  
+> tree
+.
+├── Annotations
+│   ├── 1608644703.xml
+│   ├── ...
+├── images
+│   ├── 1608644703.jpg
+│   ├── ...
+└── megots150images.zip
+```
 
 ## Demonstrateurs
 
