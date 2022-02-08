@@ -82,7 +82,8 @@ def augment(annotation, input_image_dir, output_image_dir, output_annotation_dir
     original_image = cv2.imread(os.path.join(input_image_dir, f"{filename}.jpg"))
 
     # write the image in the output directory
-    cv2.imwrite(os.path.join(output_image_dir, f"{filename}.jpg"), original_image)
+    from skimage import io
+    img = io.imread(os.path.join(output_image_dir, f"{filename}.jpg"), original_image)
 
     # create the original bboxes
     _bbs = [
@@ -120,7 +121,8 @@ def augment(annotation, input_image_dir, output_image_dir, output_annotation_dir
         # augment the image
         image_aug = pipeline_.augment_images([original_image])[0]
         # save the image in the output directory
-        cv2.imwrite(os.path.join(output_image_dir, f"{filename}_{i}.jpg"), image_aug)
+        from skimage import io
+        img = io.imread(os.path.join(output_image_dir, f"{filename}_{i}.jpg"), image_aug)
 
         # augment the bboxes
         bbs_aug = pipeline_.augment_bounding_boxes([original_bbs])[0].remove_out_of_image().clip_out_of_image()
