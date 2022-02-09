@@ -70,7 +70,7 @@ def augmentation_pipeline():
     )
 
 
-def augment(annotation, input_image_dir, output_image_dir, output_annotation_dir, size):
+def augment(annotation, input_image_dir, output_image_dir, output_annotation_dir, size, file_ext):
 
     # create the augmentation pipeline
     pipeline = augmentation_pipeline()
@@ -78,12 +78,17 @@ def augment(annotation, input_image_dir, output_image_dir, output_annotation_dir
     # filename from label studio : base filename (w/o extension neither path)
     filename = annotation['filename']
 
+    # extension
+    if filename not in file_ext:
+      raise Exception(f"file {filename} is unknown...")
+
+    ext = file_ext[filename]
+
     # load the original image
-    original_image = cv2.imread(os.path.join(input_image_dir, f"{filename}.jpg"))
+    original_image = cv2.imread(os.path.join(input_image_dir, f"{filename}{ext}"))
 
     # write the image in the output directory
-    from skimage import io
-    img = io.imread(os.path.join(output_image_dir, f"{filename}.jpg"), original_image)
+    cv2.imwrite(os.path.join(output_image_dir, f"{filename}{ext}"), original_image)
 
     # create the original bboxes
     _bbs = [
@@ -97,7 +102,7 @@ def augment(annotation, input_image_dir, output_image_dir, output_annotation_dir
     original_bbs = ia.BoundingBoxesOnImage(_bbs, shape=original_image.shape)
 
     # save the bboxes in the output directory
-    writer = Writer(path=os.path.join("images", f"{filename}.jpg"),
+    writer = Writer(path=os.path.join("images", f"{filename}{ext}"),
                     width=annotation['size']['width'],
                     height=annotation['size']['height'],
                     database="BFC")
@@ -120,14 +125,14 @@ def augment(annotation, input_image_dir, output_image_dir, output_annotation_dir
 
         # augment the image
         image_aug = pipeline_.augment_images([original_image])[0]
+        
         # save the image in the output directory
-        from skimage import io
-        img = io.imread(os.path.join(output_image_dir, f"{filename}_{i}.jpg"), image_aug)
-
+        cv2.imwrite(os.path.join(output_image_dir, f"{filename}_{i}{ext}"), image_aug)
+        
         # augment the bboxes
         bbs_aug = pipeline_.augment_bounding_boxes([original_bbs])[0].remove_out_of_image().clip_out_of_image()
         # save the bboxes in the output directory
-        writer = Writer(path=os.path.join(output_image_dir, f"{filename}_{i}.jpg"),
+        writer = Writer(path=os.path.join(output_image_dir, f"{filename}_{i}{ext}"),
                         width=annotation['size']['width'],
                         height=annotation['size']['height'],
                         database="BFC")
@@ -202,6 +207,11 @@ if __name__ == '__main__':
 
                 print(f"create dataset {mode} with params {params}")
 
+                print("create file / extension mapping")
+                file_ext = os.listdir(image_dir)
+                file_ext = [os.path.splitext(f) for f in file_ext]
+                file_ext = {f:e for f, e in file_ext}
+
                 for file in params["xml_files"]:
 
                     # get the annotation from Pascal VOC xml file
@@ -212,7 +222,8 @@ if __name__ == '__main__':
                             input_image_dir=image_dir,
                             output_image_dir=dataset_image_dir,
                             output_annotation_dir=dataset_annotation_dir,
-                            size=params["size"])
+                            size=params["size"],
+                            file_ext=file_ext)
 
                 dataset_zipfile = f"{mode}_{os.path.basename(args.zip)}"
                 print(f"created zip file: {dataset_zipfile}")
