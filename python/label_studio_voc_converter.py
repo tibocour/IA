@@ -44,7 +44,7 @@ def augmentation_pipeline():
         [
             # apply the following augmenters to most images
             ia.augmenters.Fliplr(0.5),  # horizontally flip 50% of all images
-            ia.augmenters.Flipud(0.5),  # vertically flip 20% of all images
+            #ia.augmenters.Flipud(0.5),  # vertically flip 20% of all images
             # crop images by -2% to 5% of their height/width
             sometimes(ia.augmenters.CropAndPad(
                 percent=(-0.02, 0.05),
