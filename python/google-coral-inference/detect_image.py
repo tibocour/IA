@@ -23,6 +23,8 @@ from PIL import ImageFont
 
 import detect
 
+font_path = '/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf'
+
 try:
     import tflite_runtime.interpreter as tflite
     import platform
@@ -83,7 +85,7 @@ def draw_objects(draw, objs, labels):
                        outline='red')
         draw.text((bbox.xmin + 10, bbox.ymin + 10),
                   '%s\n%.2f' % (labels.get(obj.id, obj.id), obj.score),
-                  fill='red',font=ImageFont.truetype('arial.ttf', 20))
+                  fill='red',font=ImageFont.truetype(font_path, 20))
 
 
 def main():
