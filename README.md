@@ -14,9 +14,9 @@ de déchets dans des images typiquement issues d'automates mis en place par
 ![Example de mégot](assets/megot-sample.png)
 
 Ensemble de jeux de données annotées par `BFC` disponibles :
-* [`megots150images.zip`](data/megots150images.zip) : archive de 147 images de mégots de cigarette
-* [`train_megots150images.zip`](data/train_megots150images.zip) : archive de plus de mille images de mégots de cigarette générée à partir de `megots150images.zip` pour l'entrainement
-* [`valid_megots150images.zip`](data/valid_megots150images.zip) : archive de 17 images de mégots de cigarette générée à partir de `megots150images.zip` pour la validation
+* [`bfc_dataset.zip`](data/bfc_dataset.zip) : archive de 2654 images de mégots, capsule, caillou etc.
+* [`train_bfc_dataset.zip`](data/train_bfc_dataset.zip) : archive de 2123 d'images de mégots, capsule, caillou etc. générée à partir de `bfc_dataset.zip` pour l'entrainement
+* [`valid_bfc_dataset.zip`](data/valid_bfc_dataset.zip) : archive de 231 images de mégots, capsule, caillou etc. générée à partir de `bfc_dataset.zip` pour la validation
 
 Les jeux de données sont au format [Pascal VOC XML](http://host.robots.ox.ac.uk/pascal/VOC/). 
 Ce format peut typiquement etre généré par l'outil [Label Studio](https://labelstud.io/)
@@ -24,23 +24,23 @@ Ce format peut typiquement etre généré par l'outil [Label Studio](https://lab
 Pour être valide, une archive `zip` doit contenir 2 répertoires `images` et `Annotations`.
 
 ```commandline
-> unzip megots150images.zip
+> unzip bfc_dataset.zip
 
-Archive:  megots150images.zip
+Archive:  bfc_dataset.zip
    creating: Annotations/
    creating: images/
-  inflating: images/1608647944.jpg   
+  inflating: images/0001.jpg   
   ...
   
 > tree
 .
 ├── Annotations
-│   ├── 1608644703.xml
+│   ├── 0001.xml
 │   ├── ...
 ├── images
-│   ├── 1608644703.jpg
+│   ├── 0001.jpg
 │   ├── ...
-└── megots150images.zip
+└── bfc_dataset.zip
 ```
 
 ## Demonstrateurs
@@ -88,7 +88,18 @@ Les modules nécessaires s'installent via `pip`
 
     pip install -r requirements.txt
 
-## Etape 0 - Augmentation des données
+## Etape 0 - Préparation des données
+
+Les données contenues dans les dossiers `Annotations` et `images` doivent être renommées pour être compatibles avec le script d'augmentation des données, nous utilisons donc un script pour renommer les fichiers .jpg ainsi que les fichiers .xml correspondants, nous modifions ensuite le contenu des fichiers .xml pour qu'ils correspondent au nouveau nom des fichiers .jpg.
+
+Usage :
+    
+    ## Doit être exécuté depuis le répértoire contenant images et Annotations
+    python rename.py
+
+
+
+## Etape 1 - Augmentation des données
 
 Si la librairie `detectron2` intègre automatiquement l'augmentation de données, ce n'est pas (encore) le cas de 
 `tensorflow-lite`. Pour etre exact, cette fonctionnalité est disponible pour la classification mais pas encore pour
@@ -116,17 +127,17 @@ Défauts :
 
 Exemple :
 
-    python python/label_studio_voc_converter.py --zip data/megots150images.zip
+    python python/label_studio_voc_converter.py --zip data/bfc_dataset.zip
     
-Les fichiers `train_megots150images.zip` et `valid_megots150images.zip` sont alors générés.
+Les fichiers `train_bfc_dataset.zip` et `valid_bfc_dataset.zip` sont alors générés.
 Chacun est un dataset au format `Pascal VOC XML`.
 
 Un notebook a été mis au point pour tester le script d'augmentation.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/data_augmentation.ipynb)
-[Augmentationn de données](https://github.com/tibocour/IA/blob/master/notebooks/data_augmentation.ipynb)
+[Augmentation de données](https://github.com/tibocour/IA/blob/master/notebooks/data_augmentation.ipynb)
 
-## Etape 1 - Entraintement par Transfert Learning
+## Etape 2 - Entraintement par Transfert Learning
 
 Le script `python/train.py` permet d'effectuer un entrainement d'un réseau de neurones pour la détection. Le 
 réseau utilisé est `efficientdet`, préconisé par Google pour la détection sur Coral. Pour plus de détails,
@@ -238,6 +249,11 @@ Un notebook de synthèse a été mis au point pour tester les scripts d'inféren
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/infer_tflite_model_video.ipynb)
 [inférence d'une image et une vidéo par scripts](https://github.com/tibocour/IA/blob/master/notebooks/infer_tflite_model_video.ipynb)
+
+Un notebook de synthèse a été mis au point pour tester les scripts d'augmentation de données, d'entrainement et d'inférence d'une image
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/data_augmentation_and_train.ipynb)
+[inférence d'une image et une vidéo par scripts](https://github.com/tibocour/IA/blob/master/notebooks/data_augmentation_and_train.ipynb)
 
 ## Inférence Coral TPU
 

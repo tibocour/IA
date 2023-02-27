@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<annotation>
+  <folder/>
+  <filename>0146</filename>
+  <path>Images/0146.jpg</path>
+  <source>
+    <database>roboflow.ai</database>
+  </source>
+  <size>
+    <width>640</width>
+    <height>480</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>megot</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <occluded>0</occluded>
+    <bndbox>
+      <xmin>241</xmin>
+      <xmax>430</xmax>
+      <ymin>158</ymin>
+      <ymax>363</ymax>
+    </bndbox>
+  </object>
+</annotation>
