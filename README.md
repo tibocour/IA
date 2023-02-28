@@ -14,9 +14,9 @@ de déchets dans des images typiquement issues d'automates mis en place par
 ![Example de mégot](assets/megot-sample.png)
 
 Ensemble de jeux de données annotées par `BFC` disponibles :
-* [`bfc_dataset.zip`](data/bfc_dataset.zip) : archive de 2654 images de mégots, capsule, caillou etc.
-* [`train_bfc_dataset.zip`](data/train_bfc_dataset.zip) : archive de 2123 d'images de mégots, capsule, caillou etc. générée à partir de `bfc_dataset.zip` pour l'entrainement
-* [`valid_bfc_dataset.zip`](data/valid_bfc_dataset.zip) : archive de 231 images de mégots, capsule, caillou etc. générée à partir de `bfc_dataset.zip` pour la validation
+* [`full_dataset.zip`](data/full_dataset.zip) : archive de 20000 images de mégots, capsule, caillou etc.
+* [`train_full_dataset.zip`](data/train_bfc_dataset.zip) : archive de ~20000 images de mégots, capsule, caillou etc. Générée à partir de `full_dataset.zip` pour l'entrainement
+* [`valid_full_dataset.zip`](data/valid_full_dataset.zip) : archive de ~500 images de mégots, capsule, caillou etc. Générée à partir de `full_dataset.zip` pour la validation
 
 Les jeux de données sont au format [Pascal VOC XML](http://host.robots.ox.ac.uk/pascal/VOC/). 
 Ce format peut typiquement etre généré par l'outil [Label Studio](https://labelstud.io/)
@@ -24,9 +24,9 @@ Ce format peut typiquement etre généré par l'outil [Label Studio](https://lab
 Pour être valide, une archive `zip` doit contenir 2 répertoires `images` et `Annotations`.
 
 ```commandline
-> unzip bfc_dataset.zip
+> unzip full_dataset.zip
 
-Archive:  bfc_dataset.zip
+Archive:  full_dataset.zip
    creating: Annotations/
    creating: images/
   inflating: images/0001.jpg   
