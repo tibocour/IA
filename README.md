@@ -90,14 +90,12 @@ Les modules nécessaires s'installent via `pip`
 
 ## Etape 0 - Préparation des données
 
-Les données contenues dans les dossiers `Annotations` et `images` doivent être renommées pour être compatibles avec le script d'augmentation des données, nous utilisons donc un script pour renommer les fichiers .jpg ainsi que les fichiers .xml correspondants, nous modifions ensuite le contenu des fichiers .xml pour qu'ils correspondent au nouveau nom des fichiers .jpg.
+Les données contenues dans les dossiers `Annotations` et `images` doivent être renommées pour être compatibles avec le script d'augmentation des données.
 
-Usage :
-    
-    ## Doit être exécuté depuis le répértoire contenant images et Annotations
-    python rename.py
+On utilise donc un notebook qui permet de préparer nos données pour qu'elle soit ensuite prête à l'augmentation et au training.
 
-
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/data_preparation.ipynb)
+[Augmentation, entrainement et inférence](https://github.com/tibocour/IA/blob/master/notebooks/data_preparation.ipynb)
 
 ## Etape 1 - Augmentation des données
 
@@ -253,7 +251,7 @@ Un notebook de synthèse a été mis au point pour tester les scripts d'inféren
 Un notebook de synthèse a été mis au point pour tester les scripts d'augmentation de données, d'entrainement et d'inférence d'une image
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tibocour/IA/blob/master/notebooks/data_augmentation_and_train.ipynb)
-[inférence d'une image et une vidéo par scripts](https://github.com/tibocour/IA/blob/master/notebooks/data_augmentation_and_train.ipynb)
+[Augmentation, entrainement et inférence](https://github.com/tibocour/IA/blob/master/notebooks/data_augmentation_and_train.ipynb)
 
 ## Inférence Coral TPU
 
